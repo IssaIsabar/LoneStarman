@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     bool gameHasEnded = false;
-    public float currentLevel = 1f;
+    public int levelIndex = 1;
     private readonly float restartDelay = 4f;
     private static GameManager _instance;
+    float delay = 4f;
     public GameObject completeLevelUI;
     public GameObject gameOverUI;
+    public GameObject enemySpawner;
     public static GameManager Instance
     {
         get
@@ -24,7 +26,6 @@ public class GameManager : MonoBehaviour
     {
         _instance = this;
     }
-
     public void EndGame()
     {
         if (gameHasEnded == false)
@@ -41,5 +42,12 @@ public class GameManager : MonoBehaviour
     public void LevelComplete()
     {
         completeLevelUI.SetActive(true);
+        levelIndex++;
+        StartCoroutine(LoadLevelAfterDelay(levelIndex));
+    }
+    IEnumerator LoadLevelAfterDelay(int newlevel)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(newlevel);
     }
 }

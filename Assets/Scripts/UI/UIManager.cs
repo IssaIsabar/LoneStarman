@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + PlayerStats.Instance.playerScore.ToString();
-        levelText.text = "Level: " + GameManager.Instance.currentLevel.ToString();
+        levelText.text = "Level: " + GameManager.Instance.levelIndex.ToString();
         pickedItemText.text = flashText;
     }
     public void ActivatePickedItem(string text)

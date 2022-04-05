@@ -1710,6 +1710,8 @@ MonoBehaviour:
   enemy: {fileID: 7509657638937949538, guid: 671bd14bc56036a4eb62ce5b109e8a5a, type: 3}
   boss: {fileID: 7042303633372214229, guid: 87254ae9ba90d2f4a845edcf273662d8, type: 3}
   player: {fileID: 1186768720}
+  repeatRate: 10
+  bossAmount: 1
 --- !u!1 &1915975114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,9 +1950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eed87de4276b4c48a65d9cec4200646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 1
+  levelIndex: 1
   completeLevelUI: {fileID: 1467751982}
   gameOverUI: {fileID: 562826251}
+  enemySpawner: {fileID: 0}
 --- !u!4 &2111024760
 Transform:
   m_ObjectHideFlags: 0

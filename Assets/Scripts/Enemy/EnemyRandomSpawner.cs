@@ -10,6 +10,9 @@ public class EnemyRandomSpawner : MonoBehaviour
     private GameObject boss;
     [SerializeField]
     private GameObject player;
+    public float repeatRate = 10f;
+    public float bossAmount = 1f;
+
 
     private int randomSpawnZone;
     private float randomXPosition, randomYPosition;
@@ -17,8 +20,11 @@ public class EnemyRandomSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke(nameof(SpawnBoss), 0f);
-        InvokeRepeating(nameof(SpawnNewEnemy), 0f, 5f);
+        for (int i = 0; i < bossAmount; i++)
+        {
+            Invoke(nameof(SpawnBoss), 0f);
+        }
+        InvokeRepeating(nameof(SpawnNewEnemy), 0f, repeatRate);
         player.GetComponent<Transform>();
     }
     private void SpawnBoss()
