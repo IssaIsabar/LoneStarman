@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
 {
     bool gameHasEnded = false;
     public float currentLevel = 1f;
-    private readonly float restartDelay = 5f;
+    private readonly float restartDelay = 4f;
     private static GameManager _instance;
     public GameObject completeLevelUI;
+    public GameObject gameOverUI;
     public static GameManager Instance
     {
         get
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
         if (gameHasEnded == false)
         {
             gameHasEnded = true;
-            Debug.Log("Game Over!");
+            gameOverUI.SetActive(true);
             Invoke(nameof(RestartGame), restartDelay);
         }
     }

@@ -50,7 +50,8 @@ public class PlayerStatus : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Boss"))
         {
-            healthBar.SetHealth(PlayerStats.Instance.playerHealth * 0);
+            PlayerStats.Instance.playerHealth = 0;
+            healthBar.SetHealth(PlayerStats.Instance.playerHealth);
             StartCoroutine(FadeOut(GetComponent<SpriteRenderer>()));
             GameManager.Instance.EndGame();
             playerMovement.enabled = false;
