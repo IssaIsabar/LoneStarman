@@ -13,6 +13,8 @@ TagManager:
   - SpeedDrink
   - RapidFire
   - BossLaserBullet
+  - LevelComplete
+  - GameOver
   layers:
   - Default
   - TransparentFX

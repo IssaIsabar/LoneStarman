@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    float delay = 4f;
     bool gameHasEnded = false;
-    public int levelIndex = 1;
     private readonly float restartDelay = 4f;
     private static GameManager _instance;
-    float delay = 4f;
+    public int levelIndex = 1;
     public GameObject completeLevelUI;
     public GameObject gameOverUI;
     public GameObject enemySpawner;
@@ -18,13 +18,23 @@ public class GameManager : MonoBehaviour
         get
         {
             if (_instance == null)
-                Debug.LogError("GameManager is null!"); 
+                Debug.LogError("GameManager is null!");
             return _instance;
         }
     }
     private void Awake()
     {
-        _instance = this;
+        if (!_instance)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }else
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void Start()
+    {
     }
     public void EndGame()
     {
