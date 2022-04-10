@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public int levelIndex = 1;
     public GameObject completeLevelUI;
     public GameObject gameOverUI;
-    public GameObject enemySpawner;
     public static GameManager Instance
     {
         get

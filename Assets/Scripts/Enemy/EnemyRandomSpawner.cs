@@ -20,7 +20,6 @@ public class EnemyRandomSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.enemySpawner = this.gameObject;
         for (int i = 0; i < bossAmount; i++)
         {
             Invoke(nameof(SpawnBoss), 0f);
