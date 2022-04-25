@@ -7,7 +7,6 @@ public class LevelCompleteUI : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        GameManager.Instance.completeLevelUI = this.gameObject;
     }
 
 }

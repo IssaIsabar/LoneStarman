@@ -7,7 +7,6 @@ public class GameOverUI : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        GameManager.Instance.gameOverUI = this.gameObject;
     }
 
 }
