@@ -34,7 +34,7 @@ public class EnemyStatus : MonoBehaviour
         {
             TakeDamage(1);
             Destroy(gameObject);
-            PlayerStats.Instance.playerScore++;
+            GameManager.Instance.playerScore++;
             ItemSpawner.Instance.SpawnNewItem(pos.position.x, pos.position.y);
         }
 

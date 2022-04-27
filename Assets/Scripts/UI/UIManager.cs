@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -33,8 +34,8 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + PlayerStats.Instance.playerScore.ToString();
-        levelText.text = "Level: " + GameManager.Instance.levelIndex.ToString();
+        scoreText.text = "Score: " + GameManager.Instance.playerScore;
+        levelText.text = "Level: " + SceneManager.GetActiveScene().buildIndex;
         pickedItemText.text = flashText;
     }
     public void ActivatePickedItem(string text)

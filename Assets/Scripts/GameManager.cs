@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    bool gameHasEnded = false;
+    public int playerScore = 0;
+    public float playerHealth = 5;
     public bool gameComplete = false;
+    bool gameHasEnded = false;
 
     private readonly float restartDelay = 4f;
     private static GameManager _instance;
-    public int levelIndex = 1;
     public static GameManager Instance
     {
         get
@@ -48,7 +49,6 @@ public class GameManager : MonoBehaviour
     }
     public void LevelComplete()
     {
-        levelIndex++;
         gameComplete = true;
     }
 
