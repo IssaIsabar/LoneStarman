@@ -14,7 +14,7 @@ public class PlayerStatus : MonoBehaviour
     {
         shooting = GetComponent<Shooting>();
         playerMovement = GetComponent<PlayerMovement>();
-        healthBar.SetMaxHealth(GameManager.Instance.playerHealth);
+        healthBar.SetMaxHealth(5);
     }
 
     public void TakeDamage(float damage)

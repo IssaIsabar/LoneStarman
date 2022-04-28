@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int playerScore = 0;
+    public int bossAmount = 1;
     public float playerHealth = 5;
-    public bool gameComplete = false;
+    public bool levelComplete = false;
+    public bool transitionScene = false;
     bool gameHasEnded = false;
 
     private readonly float restartDelay = 4f;
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
     }
     public void LevelComplete()
     {
-        gameComplete = true;
+        levelComplete = true;
     }
 
 }

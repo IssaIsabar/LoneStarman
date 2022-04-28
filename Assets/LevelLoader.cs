@@ -17,9 +17,10 @@ public class LevelLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameComplete)
+        if (GameManager.Instance.levelComplete)
         {
-            GameManager.Instance.gameComplete = false;
+            GameManager.Instance.levelComplete = false;
+            GameManager.Instance.transitionScene = true;
             LoadNextLevel();
         }
 
@@ -33,6 +34,7 @@ public class LevelLoader : MonoBehaviour
     {
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionDelay);
+        GameManager.Instance.transitionScene = false;
         SceneManager.LoadScene(levelIndex);
     }
 }
