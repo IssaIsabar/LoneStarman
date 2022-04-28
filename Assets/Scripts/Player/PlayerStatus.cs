@@ -53,14 +53,14 @@ public class PlayerStatus : MonoBehaviour
             GameManager.Instance.playerHealth = 0;
             healthBar.SetHealth(GameManager.Instance.playerHealth);
             StartCoroutine(FadeOut(GetComponent<SpriteRenderer>()));
-            GameManager.Instance.EndGame();
+            GameManager.Instance.gameHasEnded = true;
             playerMovement.enabled = false;
         }
         else if (collision.gameObject.CompareTag("Enemy") && GameManager.Instance.playerHealth == 1)
         {
             TakeDamage(1);
             Destroy(collision.gameObject);
-            GameManager.Instance.EndGame();
+            GameManager.Instance.gameHasEnded = true;
             StartCoroutine(FadeOut(GetComponent<SpriteRenderer>()));
             playerMovement.enabled = false;
         }
@@ -68,7 +68,7 @@ public class PlayerStatus : MonoBehaviour
         {
             TakeDamage(1);
             Destroy(collision.gameObject);
-            GameManager.Instance.EndGame();
+            GameManager.Instance.gameHasEnded = true;
             StartCoroutine(FadeOut(GetComponent<SpriteRenderer>()));
             playerMovement.enabled = false;
         }

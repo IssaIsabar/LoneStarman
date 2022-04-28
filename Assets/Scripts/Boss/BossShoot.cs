@@ -15,7 +15,8 @@ public class BossShoot : MonoBehaviour
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        InvokeRepeating("Shoot", 5, 2f);
+        if (!GameManager.Instance.transitionScene)
+            InvokeRepeating("Shoot", 5, 2f);
     }
 
     // Update is called once per frame

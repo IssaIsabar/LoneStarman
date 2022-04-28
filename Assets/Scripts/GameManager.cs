@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public float playerHealth = 5;
     public bool levelComplete = false;
     public bool transitionScene = false;
-    bool gameHasEnded = false;
+    public bool gameHasEnded = false;
 
     private readonly float restartDelay = 4f;
     private static GameManager _instance;
@@ -29,25 +29,21 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
-        }else
+        }
+        else
         {
             Destroy(gameObject);
         }
     }
-    private void Start()
-    {
-    }
     public void EndGame()
     {
-        if (gameHasEnded == false)
-        {
-            gameHasEnded = true;
-            Invoke(nameof(RestartGame), restartDelay);
-        }
+        gameHasEnded = false;
+        Invoke(nameof(RestartGame), restartDelay);
     }
     void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(1);
+        playerHealth = 5;
     }
     public void LevelComplete()
     {
