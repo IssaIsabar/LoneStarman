@@ -11,7 +11,9 @@ public class LevelLoader : MonoBehaviour
 
     void Start()
     {
-        
+        UIManager.Instance.levelPopObject.SetActive(false);
+        UIManager.Instance.levelPopObject.SetActive(true);
+
     }
 
     // Update is called once per frame

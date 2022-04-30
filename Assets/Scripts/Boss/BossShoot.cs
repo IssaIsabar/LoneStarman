@@ -27,7 +27,7 @@ public class BossShoot : MonoBehaviour
 
     private void Shoot()
     {
-        audioSource.PlayOneShot(shootingAudioClip);
+        //audioSource.PlayOneShot(shootingAudioClip);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);

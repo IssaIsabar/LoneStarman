@@ -8,11 +8,13 @@ public class UIManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject pickedItem;
+    public GameObject levelPopObject;
     private static UIManager _instance;
     private string flashText = string.Empty;
     public Text scoreText;
     public Text levelText;
     public Text pickedItemText;
+    public Text levelPop;
     public static UIManager Instance
     {
         get
@@ -37,6 +39,7 @@ public class UIManager : MonoBehaviour
         scoreText.text = "Score: " + GameManager.Instance.playerScore;
         levelText.text = "Level: " + SceneManager.GetActiveScene().buildIndex;
         pickedItemText.text = flashText;
+        levelPop.text = "Level: " + SceneManager.GetActiveScene().buildIndex;
     }
     public void ActivatePickedItem(string text)
     {
@@ -44,4 +47,5 @@ public class UIManager : MonoBehaviour
         pickedItem.SetActive(false);
         pickedItem.SetActive(true);
     }
+
 }

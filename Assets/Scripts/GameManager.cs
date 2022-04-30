@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int playerScore = 0;
-    public int bossAmount = 1;
     public float playerHealth = 5;
     public bool levelComplete = false;
     public bool transitionScene = false;
