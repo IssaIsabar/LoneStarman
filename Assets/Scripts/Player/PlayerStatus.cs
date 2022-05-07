@@ -16,19 +16,21 @@ public class PlayerStatus : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         healthBar.SetMaxHealth(5);
     }
+    void Update()
+    {
+        healthBar.SetHealth(GameManager.Instance.playerHealth);
+    }
 
     public void TakeDamage(float damage)
     {
         GameManager.Instance.playerHealth -= damage;
         UIManager.Instance.ActivatePickedItem("-1 hp");
-        healthBar.SetHealth(GameManager.Instance.playerHealth);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("HealthPills"))
         {
             GameManager.Instance.playerHealth++;
-            healthBar.SetHealth(GameManager.Instance.playerHealth);
             UIManager.Instance.ActivatePickedItem("+1 health");
             Destroy(collision.gameObject);
         }
@@ -48,34 +50,22 @@ public class PlayerStatus : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Boss"))
+        if (collision.gameObject.CompareTag("Boss") || collision.gameObject.CompareTag("BigBoss") || collision.gameObject.CompareTag("BiggestBoss"))
         {
             GameManager.Instance.playerHealth = 0;
-            healthBar.SetHealth(GameManager.Instance.playerHealth);
-            StartCoroutine(FadeOut(GetComponent<SpriteRenderer>()));
-            GameManager.Instance.gameHasEnded = true;
-            playerMovement.enabled = false;
         }
-        else if (collision.gameObject.CompareTag("Enemy") && GameManager.Instance.playerHealth == 1)
+        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("BossLaserBullet") && GameManager.Instance.playerHealth > 1)
         {
             TakeDamage(1);
             Destroy(collision.gameObject);
-            GameManager.Instance.gameHasEnded = true;
+
+        }
+        if(GameManager.Instance.playerHealth <= 0)
+        {
+            Destroy(gameObject.GetComponent<CircleCollider2D>());
             StartCoroutine(FadeOut(GetComponent<SpriteRenderer>()));
             playerMovement.enabled = false;
-        }
-        else if (collision.gameObject.CompareTag("BossLaserBullet") && GameManager.Instance.playerHealth == 1)
-        {
-            TakeDamage(1);
-            Destroy(collision.gameObject);
-            GameManager.Instance.gameHasEnded = true;
-            StartCoroutine(FadeOut(GetComponent<SpriteRenderer>()));
-            playerMovement.enabled = false;
-        }
-        else
-        {
-            TakeDamage(1);
-            Destroy(collision.gameObject);
+            GameManager.Instance.EndGame();
         }
     }
 

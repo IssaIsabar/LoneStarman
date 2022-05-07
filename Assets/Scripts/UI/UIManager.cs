@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
         scoreText.text = "Score: " + GameManager.Instance.playerScore;
         levelText.text = "Level: " + SceneManager.GetActiveScene().buildIndex;
         pickedItemText.text = flashText;
-        levelPop.text = "Level: " + SceneManager.GetActiveScene().buildIndex;
+        levelPop.text = "Level " + SceneManager.GetActiveScene().buildIndex;
     }
     public void ActivatePickedItem(string text)
     {

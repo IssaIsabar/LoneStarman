@@ -499,7 +499,7 @@ RectTransform:
   - {fileID: 60400511}
   - {fileID: 342198345}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -998,8 +998,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -735.26196, y: 463.97498}
-  m_SizeDelta: {x: 311.4761, y: 72.0501}
+  m_AnchoredPosition: {x: -745, y: 450}
+  m_SizeDelta: {x: 297.29, y: 93.2906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1011403319
 MonoBehaviour:
@@ -1028,10 +1028,10 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 111
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Score: '
@@ -1152,7 +1152,7 @@ Transform:
   - {fileID: 519420032}
   - {fileID: 537953008}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1186768724
 MonoBehaviour:
@@ -1380,8 +1380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 792.1132, y: 458.27}
-  m_SizeDelta: {x: 297.2909, y: 83.467}
+  m_AnchoredPosition: {x: 811, y: 450}
+  m_SizeDelta: {x: 217.6385, y: 83.467}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1258279815
 MonoBehaviour:
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   enemy: {fileID: 7509657638937949538, guid: 671bd14bc56036a4eb62ce5b109e8a5a, type: 3}
   boss: {fileID: 7042303633372214229, guid: 87254ae9ba90d2f4a845edcf273662d8, type: 3}
   player: {fileID: 1186768720}
-  repeatRate: 5
+  repeatRate: 2
   bossAmount: 2
 --- !u!1 &1915975114
 GameObject:
@@ -1679,9 +1679,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScore: 0
-  playerHealth: 5
+  playerHealth: 1000
   levelComplete: 0
   transitionScene: 0
+  bossCollision: 0
   gameHasEnded: 0
 --- !u!4 &2111024760
 Transform:

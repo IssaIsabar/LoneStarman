@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public float playerHealth = 5;
     public bool levelComplete = false;
     public bool transitionScene = false;
+    public bool bossCollision = false;
     public bool gameHasEnded = false;
 
     private readonly float restartDelay = 4f;
@@ -36,13 +37,14 @@ public class GameManager : MonoBehaviour
     }
     public void EndGame()
     {
-        gameHasEnded = false;
+        gameHasEnded = true;
         Invoke(nameof(RestartGame), restartDelay);
     }
     void RestartGame()
     {
         SceneManager.LoadScene(1);
         playerHealth = 5;
+        playerScore = 0;
     }
     public void LevelComplete()
     {

@@ -10,13 +10,14 @@ public class BossShoot : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip shootingAudioClip;
 
+    public float bulletRepeatRate = 0f;
     public float bulletForce = 20f;
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         if (!GameManager.Instance.transitionScene)
-            InvokeRepeating("Shoot", 5, 2f);
+            InvokeRepeating("Shoot", 5, bulletRepeatRate);
     }
 
     // Update is called once per frame

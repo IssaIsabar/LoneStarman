@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossStatus : MonoBehaviour
+public class BigBossStatus : MonoBehaviour
 {
-
     public float speed;
     public float bossHealth = 40f;
     public float distance = 0f;
@@ -26,14 +25,14 @@ public class BossStatus : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         healthBar.SetMaxHealth(bossHealth);
     }
-    private void FixedUpdate()
-    {
-        MoveTowards();
-    }
     public void TakeDamage(float damage)
     {
         bossHealth -= damage;
         healthBar.SetHealth(bossHealth);
+    }
+    private void FixedUpdate()
+    {
+        MoveTowards();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -48,7 +47,7 @@ public class BossStatus : MonoBehaviour
             Destroy(this.gameObject);
             GameManager.Instance.LevelComplete();
         }
-        else if (collision.gameObject.CompareTag("Boss"))
+        else if (collision.gameObject.CompareTag("BigBoss"))
         {
             firstBoss = transform;
             secondBoss = collision.transform;
@@ -60,8 +59,6 @@ public class BossStatus : MonoBehaviour
         {
             bossHealth += collision.gameObject.GetComponent<EnemyStatus>().enemyHealth;
         }
-
-
     }
     public void MoveTowards()
     {
@@ -70,7 +67,7 @@ public class BossStatus : MonoBehaviour
             transform.position = Vector2.MoveTowards(firstBoss.position, secondBoss.position, mergeSpeed);
             if (Vector2.Distance(firstBoss.position, secondBoss.position) < distance)
             {
-                if (ID < secondBoss.gameObject.GetComponent<BossStatus>().ID) { return; }
+                if (ID < secondBoss.gameObject.GetComponent<BigBossStatus>().ID) { return; }
                 GameObject O = Instantiate(MergedObject, transform.position, Quaternion.identity) as GameObject;
                 Destroy(secondBoss.gameObject);
                 Destroy(gameObject);
@@ -81,6 +78,5 @@ public class BossStatus : MonoBehaviour
     {
         if (!GameManager.Instance.transitionScene)
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
     }
 }

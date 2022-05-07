@@ -26,8 +26,8 @@ public class LevelLoader : MonoBehaviour
             LoadNextLevel();
         }else if (GameManager.Instance.gameHasEnded)
         {
+            GameManager.Instance.gameHasEnded = false;
             transition.SetTrigger("GameOver");
-            GameManager.Instance.EndGame();
         }
 
     }
