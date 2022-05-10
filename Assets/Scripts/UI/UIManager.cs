@@ -7,14 +7,17 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject pickedItem;
-    public GameObject levelPopObject;
     private static UIManager _instance;
     private string flashText = string.Empty;
+
+    public GameObject pickedItem;
+    public GameObject levelPopObject;
+    public GameObject rapidFireImg;
     public Text scoreText;
-    public Text levelText;
     public Text pickedItemText;
     public Text levelPop;
+    public Text speedText;
+    public int speedIndex = 0;
     public static UIManager Instance
     {
         get
@@ -37,9 +40,9 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + GameManager.Instance.playerScore;
-        levelText.text = "Level: " + SceneManager.GetActiveScene().buildIndex;
         pickedItemText.text = flashText;
-        levelPop.text = "Level " + SceneManager.GetActiveScene().buildIndex;
+        levelPop.text = "Start";
+        speedText.text = "x" + speedIndex.ToString();
     }
     public void ActivatePickedItem(string text)
     {

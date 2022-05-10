@@ -30,19 +30,22 @@ public class PlayerStatus : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("HealthPills"))
         {
-            GameManager.Instance.playerHealth++;
+            if (GameManager.Instance.playerHealth < 10)
+                GameManager.Instance.playerHealth++;
             UIManager.Instance.ActivatePickedItem("+1 health");
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("SpeedDrink") && playerMovement.MovementSpeed < 12)
         {
             playerMovement.MovementSpeed++;
+            UIManager.Instance.speedIndex++;
             UIManager.Instance.ActivatePickedItem("+1 speed");
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("RapidFire"))
         {
             shooting.rapidFire = true;
+            UIManager.Instance.rapidFireImg.SetActive(true);
             UIManager.Instance.ActivatePickedItem("Rapid fire enabled");
             Destroy(collision.gameObject);
         }
@@ -60,7 +63,7 @@ public class PlayerStatus : MonoBehaviour
             Destroy(collision.gameObject);
 
         }
-        if(GameManager.Instance.playerHealth <= 0)
+        if (GameManager.Instance.playerHealth <= 0)
         {
             Destroy(gameObject.GetComponent<CircleCollider2D>());
             StartCoroutine(FadeOut(GetComponent<SpriteRenderer>()));
@@ -87,5 +90,5 @@ public class PlayerStatus : MonoBehaviour
 
         sr.color = tmpColor;
     }
-    
+
 }
