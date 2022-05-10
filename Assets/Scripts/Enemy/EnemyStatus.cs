@@ -8,19 +8,17 @@ public class EnemyStatus : MonoBehaviour
     public float distance = 0f;
     public float mergeSpeed = 0f;
     public HealthBar healthBar;
-    public GameObject mergedObject;
+    public GameObject MergedObject;
 
     private bool canMerge = false;
     private int ID;
-    private Collider2D col;
     private Transform pos;
-    private Transform thisEnemy;
+    private Transform thisTarget;
     private Transform collisionTarget;
     void Start()
     {
         healthBar.SetMaxHealth(enemyHealth);
         pos = GetComponent<Transform>();
-        col = GetComponent<Collider2D>();
         ID = GetInstanceID();
     }
     void Update()
@@ -43,18 +41,27 @@ public class EnemyStatus : MonoBehaviour
         {
             TakeDamage(1);
         }
-        else if (collision.gameObject.CompareTag("LaserBullet") && enemyHealth == 1)
+        else if (collision.gameObject.CompareTag("LaserBullet") && enemyHealth <= 1)
         {
             TakeDamage(1);
             Destroy(gameObject);
             GameManager.Instance.playerScore++;
             ItemSpawner.Instance.SpawnNewItem(pos.position.x, pos.position.y);
         }
-        else if (!collision.gameObject.CompareTag("Enemy"))
+        else if (collision.gameObject.CompareTag("Enemy"))
         {
-            thisEnemy = transform;
+            thisTarget = transform;
             collisionTarget = collision.transform;
             canMerge = true;
+            Destroy(collision.gameObject.GetComponent<Rigidbody2D>());
+            Destroy(GetComponent<Rigidbody2D>());
+        }
+        else if (!collision.gameObject.CompareTag("Enemy") || !collision.gameObject.CompareTag("LaserBullet"))
+        {
+            thisTarget = transform;
+            collisionTarget = collision.transform;
+            canMerge = true;
+            Destroy(GetComponent<Rigidbody2D>());
         }
 
 
@@ -64,14 +71,18 @@ public class EnemyStatus : MonoBehaviour
     {
         if (canMerge)
         {
-            transform.position = Vector2.MoveTowards(thisEnemy.position, collisionTarget.position, mergeSpeed);
-            if (Vector2.Distance(thisEnemy.position, collisionTarget.position) < distance)
+            transform.position = Vector2.MoveTowards(thisTarget.position, collisionTarget.position, mergeSpeed);
+            if (Vector2.Distance(thisTarget.position, collisionTarget.position) < distance)
             {
-                Debug.Log("Yel");
+                if (collisionTarget.gameObject.CompareTag("Enemy"))
+                {
+                    if (ID < collisionTarget.gameObject.GetComponent<EnemyStatus>().ID) { return; }
+                    GameObject O = Instantiate(MergedObject, transform.position, Quaternion.identity) as GameObject;
+                    Destroy(collisionTarget.gameObject);
+                }
                 Destroy(gameObject);
             }
         }
-        canMerge = false;
     }
 
 

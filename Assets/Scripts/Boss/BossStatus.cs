@@ -13,8 +13,8 @@ public class BossStatus : MonoBehaviour
     public GameObject MergedObject;
     public HealthBar healthBar;
 
-    private Transform firstBoss;
-    private Transform secondBoss;
+    private Transform thisTarget;
+    private Transform collisionTarget;
     private Transform target;
     private bool canMerge;
     private int ID;
@@ -29,11 +29,11 @@ public class BossStatus : MonoBehaviour
     private void FixedUpdate()
     {
         MoveTowards();
+        healthBar.SetHealth(bossHealth);
     }
     public void TakeDamage(float damage)
     {
         bossHealth -= damage;
-        healthBar.SetHealth(bossHealth);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -42,16 +42,17 @@ public class BossStatus : MonoBehaviour
         {
             TakeDamage(bulletDamage);
         }
-        else if (collision.gameObject.CompareTag("LaserBullet") && bossHealth == 1)
+        else if (collision.gameObject.CompareTag("LaserBullet") && bossHealth <= 1)
         {
             TakeDamage(bulletDamage);
-            Destroy(this.gameObject);
-            GameManager.Instance.LevelComplete();
+            GameManager.Instance.playerScore += 5;
+            Destroy(gameObject);
+            //GameManager.Instance.LevelComplete();
         }
         else if (collision.gameObject.CompareTag("Boss"))
         {
-            firstBoss = transform;
-            secondBoss = collision.transform;
+            thisTarget = transform;
+            collisionTarget = collision.transform;
             canMerge = true;
             Destroy(collision.gameObject.GetComponent<Rigidbody2D>());
             Destroy(GetComponent<Rigidbody2D>());
@@ -60,6 +61,13 @@ public class BossStatus : MonoBehaviour
         {
             bossHealth += collision.gameObject.GetComponent<EnemyStatus>().enemyHealth;
         }
+        else if (!collision.gameObject.CompareTag("Boss") || !collision.gameObject.CompareTag("LaserBullet"))
+        {
+            thisTarget = transform;
+            collisionTarget = collision.transform;
+            canMerge = true;
+            Destroy(GetComponent<Rigidbody2D>());
+        }
 
 
     }
@@ -67,12 +75,15 @@ public class BossStatus : MonoBehaviour
     {
         if (canMerge)
         {
-            transform.position = Vector2.MoveTowards(firstBoss.position, secondBoss.position, mergeSpeed);
-            if (Vector2.Distance(firstBoss.position, secondBoss.position) < distance)
+            transform.position = Vector2.MoveTowards(thisTarget.position, collisionTarget.position, mergeSpeed);
+            if (Vector2.Distance(thisTarget.position, collisionTarget.position) < distance)
             {
-                if (ID < secondBoss.gameObject.GetComponent<BossStatus>().ID) { return; }
-                GameObject O = Instantiate(MergedObject, transform.position, Quaternion.identity) as GameObject;
-                Destroy(secondBoss.gameObject);
+                if (collisionTarget.gameObject.CompareTag("Boss"))
+                {
+                    if (ID < collisionTarget.gameObject.GetComponent<BossStatus>().ID) { return; }
+                    GameObject O = Instantiate(MergedObject, transform.position, Quaternion.identity) as GameObject;
+                    Destroy(collisionTarget.gameObject);
+                }
                 Destroy(gameObject);
             }
         }

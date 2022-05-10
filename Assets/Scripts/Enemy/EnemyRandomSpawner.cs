@@ -11,25 +11,33 @@ public class EnemyRandomSpawner : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
-    public float repeatRate = 10f;
-    public int bossAmount = 1;
-
+    private float repeatRate = 9f;
+    private int bossAmount = 0;
     private int alternateInteger = 0;
-    private int checkSpawnDuplicate;
-    private int randomDigit;
     private float randomXPosition, randomYPosition;
 
     // Start is called before the first frame update
     void Start()
+    {
+        InvokeRepeating(nameof(Spawner), 0f, 30);
+        player.GetComponent<Transform>();
+    }
+    private void Spawner()
     {
         for (int i = 0; i < bossAmount; i++)
         {
             Invoke(nameof(SpawnBoss), 0f);
         }
         InvokeRepeating(nameof(SpawnNewEnemy), 0f, repeatRate);
-        player.GetComponent<Transform>();
+        IncreaseDifficulty();
     }
-    
+
+    private void IncreaseDifficulty()
+    {
+        if (repeatRate != 1)
+            repeatRate--;
+        bossAmount++;
+    }
     private void SpawnBoss()
     {
         Instantiate(boss, GetCoordinates(), Quaternion.identity);
@@ -71,7 +79,7 @@ public class EnemyRandomSpawner : MonoBehaviour
                 randomYPosition = Random.Range(pY + 17f, pY + 18f);
                 break;
         }
-        
+
         return new Vector3(randomXPosition, randomYPosition, 0f);
     }
 }

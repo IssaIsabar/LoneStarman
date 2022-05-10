@@ -5,7 +5,7 @@ using UnityEngine;
 public class BiggestBossStatus : MonoBehaviour
 {
     public float speed;
-    public float bossHealth = 40f;
+    public float bossHealth = 80f;
     public float bulletDamage = 0f;
     public HealthBar healthBar;
 
@@ -20,7 +20,6 @@ public class BiggestBossStatus : MonoBehaviour
     public void TakeDamage(float damage)
     {
         bossHealth -= damage;
-        healthBar.SetHealth(bossHealth);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -28,11 +27,12 @@ public class BiggestBossStatus : MonoBehaviour
         {
             TakeDamage(bulletDamage);
         }
-        else if (collision.gameObject.CompareTag("LaserBullet") && bossHealth == 1)
+        else if (collision.gameObject.CompareTag("LaserBullet") && bossHealth <= 1)
         {
             TakeDamage(bulletDamage);
+            GameManager.Instance.playerScore += 30;
             Destroy(this.gameObject);
-            GameManager.Instance.LevelComplete();
+            //GameManager.Instance.LevelComplete();
         }
         else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss") || collision.gameObject.CompareTag("BigBoss"))
         {
@@ -42,13 +42,12 @@ public class BiggestBossStatus : MonoBehaviour
                 bossHealth += collision.gameObject.GetComponent<BossStatus>().bossHealth;
             else if (collision.gameObject.CompareTag("BiggBoss"))
                 bossHealth += collision.gameObject.GetComponent<BigBossStatus>().bossHealth;
-            Destroy(collision.gameObject);
         }
     }
     void Update()
     {
+        healthBar.SetHealth(bossHealth);
         if (!GameManager.Instance.transitionScene)
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
     }
 }

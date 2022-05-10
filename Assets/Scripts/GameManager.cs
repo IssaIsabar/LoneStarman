@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public bool transitionScene = false;
     public bool bossCollision = false;
     public bool gameHasEnded = false;
-
+    
     private readonly float restartDelay = 4f;
     private static GameManager _instance;
     public static GameManager Instance
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     void RestartGame()
     {
         SceneManager.LoadScene(1);
-        playerHealth = 5;
+        playerHealth = 10;
         playerScore = 0;
     }
     public void LevelComplete()

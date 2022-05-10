@@ -9,7 +9,7 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     public AudioSource audioSource;
     public AudioClip shootingAudioClip;
-    private float fireSpeed = 0.2f;
+    private float fireSpeed = 0.1f;
     private float canFire = 0.5f;
     public bool rapidFire = false;
 

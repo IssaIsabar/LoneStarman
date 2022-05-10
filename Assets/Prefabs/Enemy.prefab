@@ -302,10 +302,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 5
-  distance: 0.5
+  distance: 0.6
   mergeSpeed: 0.1
   healthBar: {fileID: 265147319893427622}
-  mergedObject: {fileID: 0}
+  MergedObject: {fileID: 7042303633372214229, guid: 87254ae9ba90d2f4a845edcf273662d8, type: 3}
 --- !u!114 &7509657638937949540
 MonoBehaviour:
   m_ObjectHideFlags: 0
