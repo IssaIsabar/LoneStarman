@@ -27,10 +27,6 @@ public class UIManager : MonoBehaviour
             return _instance;
         }
     }
-    private void Start()
-    {
-        
-    }
     private void Awake()
     {
         _instance = this;
@@ -41,7 +37,7 @@ public class UIManager : MonoBehaviour
     {
         scoreText.text = "Score: " + GameManager.Instance.playerScore;
         pickedItemText.text = flashText;
-        levelPop.text = "Start";
+        levelPop.text = "Survive";
         speedText.text = "x" + speedIndex.ToString();
     }
     public void ActivatePickedItem(string text)
