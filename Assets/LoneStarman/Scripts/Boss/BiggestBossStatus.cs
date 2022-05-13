@@ -40,7 +40,7 @@ public class BiggestBossStatus : MonoBehaviour
                 bossHealth += collision.gameObject.GetComponent<EnemyStatus>().enemyHealth;
             else if (collision.gameObject.CompareTag("Boss"))
                 bossHealth += collision.gameObject.GetComponent<BossStatus>().bossHealth;
-            else if (collision.gameObject.CompareTag("BiggBoss"))
+            else if (collision.gameObject.CompareTag("BigBoss"))
                 bossHealth += collision.gameObject.GetComponent<BigBossStatus>().bossHealth;
         }
     }

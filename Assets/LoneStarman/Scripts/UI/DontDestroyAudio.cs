@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class DontDestroyAudio : MonoBehaviour
 {
-    private void Awake()
+    private static DontDestroyAudio _instance;
+
+    void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //if we don't have an [_instance] set yet
+        if (!_instance)
+            _instance = this;
+        //otherwise, if we do, kill this thing
+        else
+            Destroy(this.gameObject);
+
+
+        DontDestroyOnLoad(this.gameObject);
     }
 }

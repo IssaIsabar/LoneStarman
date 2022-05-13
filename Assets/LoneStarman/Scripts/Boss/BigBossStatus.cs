@@ -58,9 +58,9 @@ public class BigBossStatus : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss"))
         {
-            if(collision.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.CompareTag("Enemy"))
                 bossHealth += collision.gameObject.GetComponent<EnemyStatus>().enemyHealth;
-            else if(collision.gameObject.CompareTag("Boss"))
+            else if (collision.gameObject.CompareTag("Boss"))
                 bossHealth += collision.gameObject.GetComponent<BossStatus>().bossHealth;
         }
         else if (!collision.gameObject.CompareTag("BigBoss") || !collision.gameObject.CompareTag("LaserBullet"))
@@ -75,6 +75,7 @@ public class BigBossStatus : MonoBehaviour
     {
         if (canMerge)
         {
+            if (transform is null || collisionTarget.transform is null) { return; }
             transform.position = Vector2.MoveTowards(thisTarget.position, collisionTarget.position, mergeSpeed);
             if (Vector2.Distance(thisTarget.position, collisionTarget.position) < distance)
             {

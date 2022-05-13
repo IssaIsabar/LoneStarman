@@ -55,9 +55,14 @@ public class PlayerStatus : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Boss") || collision.gameObject.CompareTag("BigBoss") || collision.gameObject.CompareTag("BiggestBoss"))
         {
-            GameManager.Instance.playerHealth = 0;
+            if (collision.gameObject.CompareTag("Boss"))
+                GameManager.Instance.playerHealth -= 3;
+            else if (collision.gameObject.CompareTag("BigBoss"))
+                GameManager.Instance.playerHealth -= 5; 
+            else if (collision.gameObject.CompareTag("BiggestBoss"))
+                GameManager.Instance.playerHealth -= 10;
         }
-        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("BossLaserBullet") && GameManager.Instance.playerHealth > 1)
+        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("BossLaserBullet") && GameManager.Instance.playerHealth >= 1)
         {
             TakeDamage(1);
             Destroy(collision.gameObject);

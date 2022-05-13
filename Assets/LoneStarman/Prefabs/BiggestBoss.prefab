@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  bossHealth: 60
-  bulletDamage: 10
+  bossHealth: 80
+  bulletDamage: 1
   healthBar: {fileID: 7857350905320936485}
 --- !u!114 &3908890043116342702
 MonoBehaviour:

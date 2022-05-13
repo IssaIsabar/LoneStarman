@@ -75,6 +75,7 @@ public class BossStatus : MonoBehaviour
     {
         if (canMerge)
         {
+            if (transform is null || collisionTarget.transform is null) { return; }
             transform.position = Vector2.MoveTowards(thisTarget.position, collisionTarget.position, mergeSpeed);
             if (Vector2.Distance(thisTarget.position, collisionTarget.position) < distance)
             {
