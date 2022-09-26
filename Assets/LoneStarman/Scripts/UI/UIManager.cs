@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
         levelPop.text = "Survive";
         speedText.text = "x" + speedIndex.ToString();
     }
-    public void ActivatePickedItem(string text)
+    public void ActivateFloatingText(string text)
     {
         flashText = text;
         pickedItem.SetActive(false);

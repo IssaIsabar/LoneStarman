@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         playerScore = 0;
     }
     public void LevelComplete()
-    {
+    {   
         levelComplete = true;
     }
 

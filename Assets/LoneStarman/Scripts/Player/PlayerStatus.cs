@@ -24,7 +24,7 @@ public class PlayerStatus : MonoBehaviour
     public void TakeDamage(float damage)
     {
         GameManager.Instance.playerHealth -= damage;
-        UIManager.Instance.ActivatePickedItem("-1 hp");
+        UIManager.Instance.ActivateFloatingText("-1 hp");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,21 +32,21 @@ public class PlayerStatus : MonoBehaviour
         {
             if (GameManager.Instance.playerHealth < 10)
                 GameManager.Instance.playerHealth++;
-            UIManager.Instance.ActivatePickedItem("+1 health");
+            UIManager.Instance.ActivateFloatingText("+1 health");
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("SpeedDrink") && playerMovement.MovementSpeed < 12)
+        else if (collision.gameObject.CompareTag("SpeedDrink") && playerMovement.movementSpeed < 12)
         {
-            playerMovement.MovementSpeed++;
+            playerMovement.movementSpeed++;
             UIManager.Instance.speedIndex++;
-            UIManager.Instance.ActivatePickedItem("+1 speed");
+            UIManager.Instance.ActivateFloatingText("+1 speed");
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("RapidFire"))
         {
             shooting.rapidFire = true;
             UIManager.Instance.rapidFireImg.SetActive(true);
-            UIManager.Instance.ActivatePickedItem("Rapid fire enabled");
+            UIManager.Instance.ActivateFloatingText("Rapid fire enabled");
             Destroy(collision.gameObject);
         }
     }

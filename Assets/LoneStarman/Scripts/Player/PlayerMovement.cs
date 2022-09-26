@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float MovementSpeed = 5f;
+    public float movementSpeed = 5f;
     public Rigidbody2D rb;
     public Camera cam;
     public SpriteRenderer rend;
@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
         playerPos = transform.position;
 
-        playerPos.x += h * MovementSpeed * Time.deltaTime;
-        playerPos.y += v * MovementSpeed * Time.deltaTime;
+        playerPos.x += h * movementSpeed * Time.deltaTime;
+        playerPos.y += v * movementSpeed * Time.deltaTime;
 
         transform.position = playerPos;
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
